@@ -13,7 +13,11 @@
     "express",
     "validation",
     "parameters",
-    "querystring"
+    "querystring",
+		"api-gateway",
+		"type-coercion",
+		"query-validation",
+		"query-string-parameters"
   ],
   "author": "Donny Swany",
   "license": "MIT",
