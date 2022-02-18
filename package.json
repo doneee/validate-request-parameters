@@ -1,6 +1,6 @@
 {
   "name": "@doneee/validate-request-parameters",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Validates input parameters in AWS Lambda or Express route events",
   "main": "lib/index.js",
   "scripts": {
@@ -36,6 +36,7 @@
     "@doneee/composable-transform-functions": "^1.0.0"
   },
   "directories": {
+    "lib": "lib",
     "test": "test"
   },
   "repository": {
