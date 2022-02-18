@@ -1,6 +1,6 @@
 {
   "name": "@doneee/validate-request-parameters",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Validates input parameters in AWS Lambda or Express route events",
   "main": "lib/index.js",
   "scripts": {
