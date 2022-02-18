@@ -36,6 +36,7 @@
     "@doneee/composable-transform-functions": "^1.0.0"
   },
   "directories": {
+    "lib": "lib",
     "test": "test"
   },
   "repository": {
