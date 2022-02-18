@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import {
 	validateQueryStringParams,
 	validateAPIGatewayEvent,
-	QueryStringValueTypes
+	QueryStringValueTypes,
 } from '../src/index';
 import APIGatewayEventStub from './APIGatewayEventStub';
 import { toUpperCase } from '@doneee/composable-transform-functions';
