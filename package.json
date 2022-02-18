@@ -1,8 +1,8 @@
 {
   "name": "@doneee/validate-request-parameters",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Validates input parameters in AWS Lambda or Express route events",
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "ts-mocha -p tsconfig.json test/**/*.spec.ts",
     "build": "npm run test && rm -rdf ./lib && tsc",
