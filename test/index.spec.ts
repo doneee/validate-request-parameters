@@ -1,15 +1,15 @@
 import { expect } from 'chai';
 import {
-	validateQueryStringParams,
+	validateParams,
 	validateAPIGatewayEvent,
 	QueryStringValueTypes,
 } from '../src/index';
 import APIGatewayEventStub from './APIGatewayEventStub';
 import { toUpperCase } from '@doneee/composable-transform-functions';
 
-describe('validateQueryStringParams', () => {
+describe('validateParams', () => {
 	it('is a function', () => {
-		expect(validateQueryStringParams).to.be.a('function');
+		expect(validateParams).to.be.a('function');
 	});
 
 	describe('required fields', () => {
@@ -24,7 +24,7 @@ describe('validateQueryStringParams', () => {
 				},
 			};
 
-			const [results, errors] = validateQueryStringParams(params, config);
+			const [results, errors] = validateParams(params, config);
 			expect(results).to.deep.equal({});
 			expect(errors).to.deep.equal({ item: ['parameter required'] });
 		});
@@ -42,7 +42,7 @@ describe('validateQueryStringParams', () => {
 				},
 			};
 
-			const [results, errors] = validateQueryStringParams(params, config);
+			const [results, errors] = validateParams(params, config);
 			expect(results).to.deep.equal({ item: 5 });
 			expect(errors).to.deep.equal({});
 		});
@@ -59,7 +59,7 @@ describe('validateQueryStringParams', () => {
 				},
 			};
 
-			const [results, errors] = validateQueryStringParams(params, config);
+			const [results, errors] = validateParams(params, config);
 			expect(results).to.deep.equal({ item: 5 });
 			expect(errors).to.deep.equal({ item: ['not an integer'] });
 		});
@@ -77,7 +77,7 @@ describe('validateQueryStringParams', () => {
 				},
 			};
 
-			const [results, errors] = validateQueryStringParams(params, config);
+			const [results, errors] = validateParams(params, config);
 			expect(results).to.deep.equal({ item: 1 });
 			expect(errors).to.deep.equal({});
 		});
@@ -93,7 +93,7 @@ describe('validateQueryStringParams', () => {
 				},
 			};
 
-			const [results, errors] = validateQueryStringParams(params, config);
+			const [results, errors] = validateParams(params, config);
 			expect(results).to.deep.equal({ item: 1.1 });
 			expect(errors).to.deep.equal({});
 		});
@@ -109,7 +109,7 @@ describe('validateQueryStringParams', () => {
 				},
 			};
 
-			const [results, errors] = validateQueryStringParams(params, config);
+			const [results, errors] = validateParams(params, config);
 			expect(results).to.deep.equal({ item: 'test' });
 			expect(errors).to.deep.equal({});
 		});
@@ -127,7 +127,7 @@ describe('validateQueryStringParams', () => {
 				},
 			};
 
-			const [results, errors] = validateQueryStringParams(params, config);
+			const [results, errors] = validateParams(params, config);
 			expect(results).to.deep.equal({});
 			expect(errors).to.deep.equal({ item: ['not an integer']});
 		});
@@ -143,7 +143,7 @@ describe('validateQueryStringParams', () => {
 				},
 			};
 
-			const [results, errors] = validateQueryStringParams(params, config);
+			const [results, errors] = validateParams(params, config);
 			expect(results).to.deep.equal({});
 			expect(errors).to.deep.equal({ item: ['not an integer']});
 		});
@@ -159,7 +159,7 @@ describe('validateQueryStringParams', () => {
 				},
 			};
 
-			const [results, errors] = validateQueryStringParams(params, config);
+			const [results, errors] = validateParams(params, config);
 			expect(results).to.deep.equal({});
 			expect(errors).to.deep.equal({ item: ['not a number']});
 		});
@@ -185,7 +185,7 @@ describe('validateQueryStringParams', () => {
 				},
 			};
 
-			const [results, errors] = validateQueryStringParams(params, config);
+			const [results, errors] = validateParams(params, config);
 			expect(results).to.deep.equal({ number: 1.1, integer: 5, string: 'test'});
 			expect(errors).to.deep.equal({});
 		});
@@ -209,7 +209,7 @@ describe('validateQueryStringParams', () => {
 				},
 			};
 
-			const [results, errors] = validateQueryStringParams(params, config);
+			const [results, errors] = validateParams(params, config);
 			expect(results).to.deep.equal({ number: 1.1, string: 'test'});
 			expect(errors).to.deep.equal({integer: ['not an integer']});
 		});
@@ -228,7 +228,7 @@ describe('validateQueryStringParams', () => {
 				},
 			};
 
-			const [results, errors] = validateQueryStringParams(params, config);
+			const [results, errors] = validateParams(params, config);
 			expect(results).to.deep.equal({});
 			expect(errors).to.deep.equal({number: ['exceeds maximum value']});
 		});
@@ -245,7 +245,7 @@ describe('validateQueryStringParams', () => {
 				},
 			};
 
-			const [results, errors] = validateQueryStringParams(params, config);
+			const [results, errors] = validateParams(params, config);
 			expect(results).to.deep.equal({});
 			expect(errors).to.deep.equal({number: ['below minimum value']});
 		});
@@ -265,7 +265,7 @@ describe('validateQueryStringParams', () => {
 				},
 			};
 
-			const [results, errors] = validateQueryStringParams(params, config);
+			const [results, errors] = validateParams(params, config);
 			expect(results).to.deep.equal({ string: 'value1' });
 			expect(errors).to.deep.equal({});
 		});
@@ -282,7 +282,7 @@ describe('validateQueryStringParams', () => {
 				},
 			};
 
-			const [results, errors] = validateQueryStringParams(params, config);
+			const [results, errors] = validateParams(params, config);
 			expect(results).to.deep.equal({});
 			expect(errors).to.deep.equal(
 				{ string: [`invalid option: [${config.string.options.join()}]`] }
@@ -301,7 +301,7 @@ describe('validateQueryStringParams', () => {
 				},
 			};
 
-			const [results, errors] = validateQueryStringParams(params, config);
+			const [results, errors] = validateParams(params, config);
 			expect(results).to.deep.equal({});
 			expect(errors).to.deep.equal({ string: ['below minimum length'] });
 		});
@@ -318,7 +318,7 @@ describe('validateQueryStringParams', () => {
 				},
 			};
 
-			const [results, errors] = validateQueryStringParams(params, config);
+			const [results, errors] = validateParams(params, config);
 			expect(results).to.deep.equal({});
 			expect(errors).to.deep.equal({ string: ['exceeds maximum length'] });
 		});
@@ -335,7 +335,7 @@ describe('validateQueryStringParams', () => {
 				},
 			};
 
-			const [results, errors] = validateQueryStringParams(params, config);
+			const [results, errors] = validateParams(params, config);
 			expect(results).to.deep.equal({ string: '1234' });
 			expect(errors).to.deep.equal({});
 		});
@@ -352,7 +352,7 @@ describe('validateQueryStringParams', () => {
 				},
 			};
 
-			const [results, errors] = validateQueryStringParams(params, config);
+			const [results, errors] = validateParams(params, config);
 			expect(results).to.deep.equal({});
 			expect(errors).to.deep.equal(
 				{ string: [`regex test failure: ${config.string.regex}`]}
@@ -373,7 +373,7 @@ describe('validateQueryStringParams', () => {
 				},
 			};
 
-			const [results, errors] = validateQueryStringParams(params, config);
+			const [results, errors] = validateParams(params, config);
 			expect(results).to.deep.equal({ string: 'ABCD' });
 			expect(errors).to.deep.equal({});
 		});
@@ -390,17 +390,30 @@ describe('validateAPIGatewayEvent', () => {
 			...APIGatewayEventStub,
 			queryStringParameters: {
 				item: 'abcd',
+			},
+			pathParameters: {
+				page: '5',
 			}
 		};
 
 		const config = {
-			item: {
-				type: QueryStringValueTypes.String,
+			queryStringParameters: {
+				item: {
+					type: QueryStringValueTypes.String,
+				},
+			},
+			pathParameters: {
+				page: {
+					type: QueryStringValueTypes.Integer,
+				},
 			},
 		};
 
 		const [results, errors] = validateAPIGatewayEvent(event, config);
-		expect(results).to.deep.equal({ queryStringParameters: { item: 'abcd' }});
-		expect(errors).to.deep.equal({ queryStringParameters: {} });
+		expect(results).to.deep.equal({
+			queryStringParameters: { item: 'abcd' },
+			pathParameters: { page: 5 },
+		});
+		expect(errors).to.deep.equal({ queryStringParameters: {}, pathParameters: {} });
 	});
 });

@@ -1,13 +1,37 @@
 import { APIGatewayEvent } from 'aws-lambda';
-import validateQueryStringParams, { ValidatorConfiguration } from './validateQueryStringParams';
+import validateParams, { ValidatorConfiguration } from './validateParams';
 
-export default function validateAPIGatewayEvent (event: APIGatewayEvent, config: ValidatorConfiguration) {
+export interface APIGatewayEventValidatorConfiguration {
+	pathParameters?: ValidatorConfiguration,
+	queryStringParameters?: ValidatorConfiguration,
+	multiValueQueryStringParameters?: ValidatorConfiguration,
+};
+
+export interface APIGatewayParameters {
+	pathParameters?: { [key: string]: string | undefined } | null,
+	queryStringParameters?: { [key: string]: string | undefined } | null,
+	multiValueQueryStringParameters?: { [key: string]: string[] | undefined} | null,
+}
+
+export default function validateAPIGatewayEvent (
+	event: APIGatewayEvent,
+	config: APIGatewayEventValidatorConfiguration
+) {
 	const [ queryStringParameters, queryStringParametersErrors ] =
-		validateQueryStringParams(event.queryStringParameters || {}, config);
+		validateParams(
+			event.queryStringParameters || {},
+			config.queryStringParameters || {},
+	);
+
+	const [ pathParameters, pathParametersErrors ] =
+		validateParams(event.pathParameters || {}, config.pathParameters || {});
 
 	return [
-		{ queryStringParameters },
-		{ queryStringParameters: queryStringParametersErrors },
+		{ queryStringParameters, pathParameters },
+		{
+			queryStringParameters: queryStringParametersErrors,
+			pathParameters: pathParametersErrors,
+		},
 	];
 }
 
