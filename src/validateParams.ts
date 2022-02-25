@@ -27,12 +27,7 @@ export interface ValidatorConfiguration {
 	[key: string]: ValidatorConfigurationItem,
 };
 
-export interface QueryStringParameters {
-	queryStringParameters?: { [key: string]: string | undefined } | null,
-	multiValueQueryStringParameters?: { [key: string]: string[] | undefined} | null,
-}
-
-export default function validateQueryStringParams (
+export default function validateParams (
 	params: QueryString,
 	config: ValidatorConfiguration
 ): [QueryString, QueryStringErrors] {

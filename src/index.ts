@@ -1,18 +1,17 @@
-import validateQueryStringParams, {
+import validateParams, {
 	QueryString,
 	QueryStringValueTypes,
 	ValidatorConfigurationItem,
 	ValidatorConfiguration,
-	QueryStringParameters,
-} from './validateQueryStringParams';
-import validateAPIGatewayEvent from './validateAPIGatewayEvent';
+} from './validateParams';
+import validateAPIGatewayEvent, { APIGatewayParameters } from './validateAPIGatewayEvent';
 
 export {
-	validateQueryStringParams,
+	validateParams,
 	validateAPIGatewayEvent,
 	QueryString,
 	QueryStringValueTypes,
 	ValidatorConfigurationItem,
 	ValidatorConfiguration,
-	QueryStringParameters,
+	APIGatewayParameters,
 };

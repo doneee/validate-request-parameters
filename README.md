@@ -16,7 +16,6 @@ events, such as API Gateway Events or Express Routes.
 * AWS APIGatewayEvent Handling (Lambda)
 * Query String Parameter Validation
 
-
 # Not Working, yet
 * Multi Value Query String Parameters
 * Request Body JSON Validation
@@ -34,38 +33,40 @@ import {
 import { toUpperCase, toLowerCase } from '@doneee/composable-transform-functions';
 
 const config = {
-  offset: {
-    type: QueryStringValueTypes.Integer,
-    min: 0,
-    defaultValue: 0,
-  },
-  limit: {
-    type: QueryStringValueTypes.Integer,
-    min: 1,
-    max: 100,
-    defaultValue: 10,
-  },
-  searchTerm: {
-    type: QueryStringValueTypes.String,
-    regex: /[a-z0-9]+/gi,
-    min: 4,
-    max: 75,
-  },
-  order: {
-    type: QueryStringValueTypes.String,
-    options: ['ASC', 'DESC'],
-    defaultValue: 'ASC',
-    transforms: [ toUpperCase ],
-  },
-  orderBy: {
-    type: QueryStringValueTypes.String,
-    transforms: [ toLowerCase ],
-    options: [
-      'name',
-      'date',
-    ],
-    defaultValue: 'name',
-  },
+	queryStringParameters: {
+		offset: {
+			type: QueryStringValueTypes.Integer,
+			min: 0,
+			defaultValue: 0,
+		},
+		limit: {
+			type: QueryStringValueTypes.Integer,
+			min: 1,
+			max: 100,
+			defaultValue: 10,
+		},
+		searchTerm: {
+			type: QueryStringValueTypes.String,
+			regex: /[a-z0-9]+/gi,
+			min: 4,
+			max: 75,
+		},
+		order: {
+			type: QueryStringValueTypes.String,
+			options: ['ASC', 'DESC'],
+			defaultValue: 'ASC',
+			transforms: [ toUpperCase ],
+		},
+		orderBy: {
+			type: QueryStringValueTypes.String,
+			transforms: [ toLowerCase ],
+			options: [
+				'name',
+				'date',
+			],
+			defaultValue: 'name',
+		},
+	},
 };
 
 exports.handler = (event) => {
